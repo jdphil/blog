@@ -27,7 +27,7 @@ export async function generateMetadata(
     return {
       title: `${post.title} - Grow with JP`,
       description: post.description,
-      metadataBase: new URL('https://blog.growwithjp.com'),
+      metadataBase: new URL('https://jonathanphillipo.com'),
       openGraph: {
         images: [...previousImages],
       },
