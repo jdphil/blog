@@ -1,16 +1,12 @@
 import { getPostBySlug, getPostSlugs } from '@/lib/blog'
 import { CalendarDays, Tag, User, Clock } from 'lucide-react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import type { ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
 import { calculateReadingTime } from '@/lib/utils'
-import { track } from '@vercel/analytics'
-
-interface Props {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+import { track } from '@vercel/analytics/server'
 
 export async function generateStaticParams() {
   const posts = await getPostSlugs()
@@ -20,13 +16,20 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: Props
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   try {
     const post = await getPostBySlug(params.slug)
+    const previousImages = (await parent).openGraph?.images || []
+
     return {
       title: `${post.title} - Grow with Lin`,
       description: post.description,
+      metadataBase: new URL('https://blog.growwithlin.com'),
+      openGraph: {
+        images: [...previousImages],
+      },
     }
   } catch {
     return {
@@ -36,9 +39,16 @@ export async function generateMetadata(
   }
 }
 
-export default async function BlogPostPage(props: Props) {
+interface BlogPostPageProps {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function BlogPostPage({
+  params,
+}: BlogPostPageProps) {
   try {
-    const post = await getPostBySlug(props.params.slug)
+    const post = await getPostBySlug(params.slug)
     const processedContent = await remark()
       .use(html)
       .process(post.content)
@@ -48,7 +58,7 @@ export default async function BlogPostPage(props: Props) {
     // Track page view with properly typed parameters
     track('post_view', {
       title: post.title,
-      slug: props.params.slug,
+      slug: params.slug,
       author: post.author,
       tags: post.tags.join(',') // Convert array to string
     })
