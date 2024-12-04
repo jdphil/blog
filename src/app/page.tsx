@@ -2,6 +2,8 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { getAllPosts } from "@/lib/blog"
 import { calculateReadingTime } from "@/lib/utils"
+import { NewsletterForm } from "@/components/NewsletterForm"
+import { Suspense } from "react"
 
 export default async function Home() {
   const allPosts = await getAllPosts()
@@ -31,6 +33,17 @@ export default async function Home() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="w-full py-12 md:py-24 bg-background border-t border-b">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-[600px]">
+            <Suspense fallback={<div className="w-full rounded-lg border bg-card p-8 shadow-sm animate-pulse" />}>
+              <NewsletterForm />
+            </Suspense>
           </div>
         </div>
       </section>
