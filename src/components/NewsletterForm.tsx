@@ -12,8 +12,10 @@ export function NewsletterForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('loading')
+    setMessage('')
 
     try {
+      console.log('Submitting email:', email)
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -21,15 +23,21 @@ export function NewsletterForm() {
       })
 
       const data = await response.json()
+      console.log('Subscription response:', { status: response.status, data })
 
       if (!response.ok) throw new Error(data.message || 'Something went wrong')
 
       setStatus('success')
-      setMessage('Thanks for subscribing! Please check your email to confirm.')
+      setMessage(data.message || 'Thanks for subscribing! Please check your email to confirm.')
       setEmail('')
     } catch (error) {
+      console.error('Subscription error:', error)
       setStatus('error')
-      setMessage(error instanceof Error ? error.message : 'Something went wrong')
+      setMessage(
+        error instanceof Error 
+          ? error.message 
+          : 'Failed to subscribe. Please try again later.'
+      )
     }
   }
 
