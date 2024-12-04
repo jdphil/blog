@@ -7,11 +7,8 @@ import html from 'remark-html'
 import { calculateReadingTime } from '@/lib/utils'
 import { track } from '@vercel/analytics'
 
-type Props = {
-  params: {
-    slug: string
-  }
-  searchParams: { [key: string]: string | string[] | undefined }
+interface PageProps {
+  params: { slug: string }
 }
 
 export async function generateStaticParams() {
@@ -22,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: Props
+  { params }: PageProps
 ): Promise<Metadata> {
   try {
     const post = await getPostBySlug(params.slug)
@@ -38,7 +35,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: PageProps) {
   try {
     const post = await getPostBySlug(params.slug)
     const processedContent = await remark()
