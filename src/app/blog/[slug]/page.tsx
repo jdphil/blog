@@ -5,11 +5,13 @@ import { notFound } from 'next/navigation'
 import { remark } from 'remark'
 import html from 'remark-html'
 import { calculateReadingTime } from '@/lib/utils'
+import { track } from '@vercel/analytics'
 
-interface BlogPostPageProps {
+type Props = {
   params: {
     slug: string
   }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateStaticParams() {
@@ -20,7 +22,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: BlogPostPageProps
+  { params }: Props
 ): Promise<Metadata> {
   try {
     const post = await getPostBySlug(params.slug)
@@ -36,7 +38,7 @@ export async function generateMetadata(
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: Props) {
   try {
     const post = await getPostBySlug(params.slug)
     const processedContent = await remark()
@@ -44,6 +46,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       .process(post.content)
     const contentHtml = processedContent.toString()
     const readingTime = calculateReadingTime(post.content)
+
+    // Track page view with properly typed parameters
+    track('post_view', {
+      title: post.title,
+      slug: params.slug,
+      author: post.author,
+      tags: post.tags.join(',') // Convert array to string
+    })
 
     return (
       <article className="flex min-h-screen flex-col">

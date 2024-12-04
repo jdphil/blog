@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter as FontSans } from "next/font/google"
+import { Analytics } from '@vercel/analytics/react'
 import { cn } from "@/lib/utils"
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -31,6 +32,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   )
