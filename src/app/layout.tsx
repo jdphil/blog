@@ -12,7 +12,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'Grow with Lin',
+  title: 'Grow with JP',
   description: 'A personal blog about growth and development',
 }
 

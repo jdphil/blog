@@ -25,16 +25,16 @@ export async function generateMetadata(
     const previousImages = (await parent).openGraph?.images || []
 
     return {
-      title: `${post.title} - Grow with Lin`,
+      title: `${post.title} - Grow with JP`,
       description: post.description,
-      metadataBase: new URL('https://blog.growwithlin.com'),
+      metadataBase: new URL('https://blog.growwithjp.com'),
       openGraph: {
         images: [...previousImages],
       },
     }
   } catch {
     return {
-      title: 'Post Not Found - Grow with Lin',
+      title: 'Post Not Found - Grow with JP',
       description: 'The requested blog post could not be found.',
     }
   }

@@ -7,7 +7,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-8">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl">Grow with Lin</span>
+            <span className="font-bold text-xl">Grow with JP</span>
           </Link>
         </div>
         <nav className="flex items-center space-x-6 text-sm font-medium">
