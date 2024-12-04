@@ -28,7 +28,7 @@ export async function generateMetadata(
       title: `${post.title} - Grow with Lin`,
       description: post.description,
     }
-  } catch (error) {
+  } catch {
     return {
       title: 'Post Not Found - Grow with Lin',
       description: 'The requested blog post could not be found.',
@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </article>
     )
-  } catch (error) {
+  } catch {
     notFound()
   }
 } 
