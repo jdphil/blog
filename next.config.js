@@ -9,6 +9,10 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizeCss: true,
+  },
+  poweredByHeader: false,
 }
 
 module.exports = nextConfig
