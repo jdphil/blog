@@ -11,6 +11,7 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ['@vercel/analytics'],
   },
   poweredByHeader: false,
 }

@@ -7,6 +7,7 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import { calculateReadingTime } from '@/lib/utils'
 import { track } from '@vercel/analytics/server'
+import { headers } from 'next/headers'
 
 export async function generateStaticParams() {
   const posts = await getPostSlugs()
@@ -55,13 +56,13 @@ export default async function BlogPostPage({
     const contentHtml = processedContent.toString()
     const readingTime = calculateReadingTime(post.content)
 
-    // Track page view with properly typed parameters
+    // Track page view with headers for proper context
     track('post_view', {
       title: post.title,
       slug: params.slug,
       author: post.author,
-      tags: post.tags.join(',') // Convert array to string
-    })
+      tags: post.tags.join(',')
+    }, { headers: headers() })
 
     return (
       <article className="flex min-h-screen flex-col">
