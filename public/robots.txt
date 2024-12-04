@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://jonathanphillipo.com/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 10 
