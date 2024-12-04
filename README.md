@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grow with Lin - Personal Blog
+
+A modern, responsive blog built with Next.js 13+, featuring server components, markdown content, and a beautiful dark theme.
+
+## Features
+
+- 🚀 Built with Next.js 13+ App Router
+- 📝 Markdown-based blog posts
+- 🔍 Real-time search functionality
+- 🏷️ Tag-based filtering
+- 🌙 Dark theme with modern UI
+- ⚡ Server-side rendering
+- 📱 Fully responsive design
+- ⏱️ Reading time estimates
+- 🎯 SEO optimized
+
+## Tech Stack
+
+- **Framework:** Next.js 13+
+- **Styling:** Tailwind CSS
+- **UI Components:** Custom components with modern design
+- **Content:** Markdown with gray-matter
+- **Icons:** Lucide React
+- **Deployment:** Vercel (recommended)
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/blog-website.git
+   cd blog-website
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+blog-website/
+├── content/          # Blog posts in markdown format
+│   └── posts/
+├── src/
+│   ├── app/         # Next.js app router pages
+│   ├── components/  # React components
+│   └── lib/         # Utility functions
+├── public/          # Static assets
+└── ...config files
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding Blog Posts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Create a new markdown file in `content/posts/`
+2. Add frontmatter with title, description, date, author, and tags
+3. Write your content in markdown
+4. The post will automatically appear in the blog
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Example frontmatter:
+```markdown
+---
+title: "Your Post Title"
+description: "Brief description of your post"
+date: "2023-12-03"
+author: "Your Name"
+tags: ["tag1", "tag2"]
+---
+```
 
-## Learn More
+## Features in Detail
 
-To learn more about Next.js, take a look at the following resources:
+- **Search:** Real-time search across all blog posts
+- **Tag Filtering:** Filter posts by tags with URL persistence
+- **Reading Time:** Automatic calculation based on content length
+- **Responsive Design:** Optimized for all screen sizes
+- **SEO:** Metadata optimization for better search engine visibility
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgments
+
+- Built with Next.js
+- Styled with Tailwind CSS
+- Icons from Lucide React
